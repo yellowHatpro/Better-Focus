@@ -5,7 +5,7 @@ import android.preference.PreferenceManager
 import dev.yellowhatpro.betterfocus.App
 
 object SharedPrefManager {
-    val pref : SharedPreferences
+    val pref: SharedPreferences
         get() = PreferenceManager.getDefaultSharedPreferences(App.context!!)
 
     fun setString(
@@ -37,9 +37,16 @@ object SharedPrefManager {
 
     var isOnboardingCompleted: Boolean?
         get() = pref.getBoolean("IS_OB_DONE", false)
+        set(value) {
+            value?.let {
+                setBoolean("IS_OB_DONE", value)
+            }
+        }
+    var isUsageStatsPermissionGranted :Boolean?
+        get() = pref.getBoolean("IS_USPG", false)
         set(value){
             value?.let {
-                setBoolean("IS_OB_DONE",value)
+                setBoolean("IS_USPG", value)
             }
         }
 }
