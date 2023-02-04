@@ -19,7 +19,7 @@ import dev.yellowhatpro.betterfocus.ui.components.AppCard
 
 @Composable
 fun DashboardScreen(modifier : Modifier = Modifier,
-    usageStatsList: List<Pair<String, Long>>,
+    usageStatsList: List<Pair<String, String>>,
     packageManager: PackageManager) {
     Surface(
         modifier = modifier
@@ -61,8 +61,9 @@ fun DashboardScreen(modifier : Modifier = Modifier,
                 } catch (e: Exception){
                     context.getDrawable(R.drawable.ic_better_focus_background)!!
                 }
-                AppCard(name = name  + it.second.toString(),
+                AppCard(name = name,
                     icon = icon,
+                    time = it.second,
                     modifier = Modifier.pointerInput(Unit) {
                         detectTapGestures(
                             onLongPress = {

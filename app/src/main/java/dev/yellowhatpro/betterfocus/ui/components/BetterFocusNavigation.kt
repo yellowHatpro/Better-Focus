@@ -19,7 +19,7 @@ import dev.yellowhatpro.betterfocus.features.setting.SettingScreen
 fun BetterFocusNavigation(
     modifier : Modifier = Modifier,
     navHostController: NavHostController,
-    usageStatsList: List<Pair<String, Long>>,
+    usageStatsList: List<Pair<String, String>>,
     packageManager: PackageManager
 ) {
     NavHost(navController = navHostController, startDestination = NavigationItem.Dashboard.route ){

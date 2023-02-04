@@ -33,7 +33,15 @@ class BetterFocusActivity : ComponentActivity() {
         val startTime = endTime - TimeUnit.DAYS.toMillis(1)
         val usageStatsList = usageStatsManager.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, startTime, endTime)
             .map {
-            (it.packageName to it.totalTimeInForeground)
+                val hms = String.format(
+                    "%02d hrs %02d min", TimeUnit.MILLISECONDS.toHours(it.totalTimeInForeground),
+                    TimeUnit.MILLISECONDS.toMinutes(it.totalTimeInForeground) - TimeUnit.HOURS.toMinutes(
+                        TimeUnit.MILLISECONDS.toHours(
+                            it.totalTimeInForeground
+                        )
+                    )
+                )
+            (it.packageName to hms)
         }.filter {
             !(isSystemApp(it.first))
         }
