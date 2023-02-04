@@ -31,8 +31,7 @@ class BetterFocusActivity : ComponentActivity() {
         val usageStatsList =
             usageStatsManager.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, startTime, endTime)
                 .map {
-
-                    val hms = String.format(
+                    val hourmin = String.format(
                         "%02d hrs %02d min",
                         TimeUnit.MILLISECONDS.toHours(it.totalTimeInForeground),
                         TimeUnit.MILLISECONDS.toMinutes(it.totalTimeInForeground) - TimeUnit.HOURS.toMinutes(
@@ -41,7 +40,7 @@ class BetterFocusActivity : ComponentActivity() {
                             )
                         )
                     )
-                    (it.packageName to hms)
+                    (it.packageName to hourmin)
                 }.filter {
                     !(isSystemApp(it.first)) && !it.first.contains(
                         "com.android",

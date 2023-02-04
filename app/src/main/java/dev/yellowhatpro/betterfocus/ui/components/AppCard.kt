@@ -17,7 +17,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 
 @Composable
@@ -26,20 +28,20 @@ fun AppCard(name:String,
     time: String,
     modifier : Modifier = Modifier) {
     Box(modifier = modifier
-        .width(150.dp)
-        .padding(10.dp)
+        .width(160.dp)
+        .padding(8.dp)
         .clip(RoundedCornerShape(20.dp))
         .background(MaterialTheme.colorScheme.primaryContainer)) {
         Column(
-            modifier = Modifier.fillMaxSize().padding(10.dp),
+            modifier = Modifier.fillMaxSize().padding(5.dp),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally) {
             Image(
                 modifier = Modifier.size(75.dp),
                 painter = rememberDrawablePainter(drawable = icon),
                 contentDescription = "")
-            Text(text = name)
-            Text(text = "Active time: $time")
+            Text(text = name, fontWeight = FontWeight.Bold)
+            Text(text = "Usage: $time", fontSize = 14.sp)
         }
     }
 }
