@@ -22,14 +22,14 @@ fun BetterFocusNavigation(
     usageStatsList: List<Pair<String, String>>,
     packageManager: PackageManager
 ) {
-    NavHost(navController = navHostController, startDestination = NavigationItem.Dashboard.route ){
-        composable(route = NavigationItem.Dashboard.route){
+    NavHost(navController = navHostController, startDestination = NavigationItem.Dashboard.route) {
+        composable(route = NavigationItem.Dashboard.route) {
             DashboardScreen(modifier = modifier, usageStatsList, packageManager)
         }
-        composable(route = NavigationItem.Focus.route){
+        composable(route = NavigationItem.Focus.route) {
             FocusScreen()
         }
-        composable(route = NavigationItem.Setting.route){
+        composable(route = NavigationItem.Setting.route) {
             SettingScreen()
         }
     }

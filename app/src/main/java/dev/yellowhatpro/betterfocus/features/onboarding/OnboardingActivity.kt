@@ -69,7 +69,7 @@ class OnboardingActivity: ComponentActivity() {
         }
     }
 
-    private fun checkUsageStatsPermissionGranted() : Boolean{
+    private fun checkUsageStatsPermissionGranted(): Boolean {
         val mode = this.getSystemService(Context.APP_OPS_SERVICE) as AppOpsManager
         val check = mode.checkOpNoThrow(
             AppOpsManager.OPSTR_GET_USAGE_STATS,

@@ -28,7 +28,7 @@ fun DashboardScreen(modifier : Modifier = Modifier,
     ) {
         val context = LocalContext.current
         LazyVerticalGrid(columns = GridCells.Adaptive(170.dp)) {
-            items(usageStatsList.filter{
+            items(usageStatsList.filter {
                 val name = try {
                     packageManager.getApplicationLabel(
                         packageManager.getApplicationInfo(
@@ -36,10 +36,10 @@ fun DashboardScreen(modifier : Modifier = Modifier,
                             0
                         )
                     ).toString()
-                } catch (E: Exception){
+                } catch (E: Exception) {
                     "error"
                 }
-                name!="error"
+                name != "error"
             }) {
                 val name = try {
                     packageManager.getApplicationLabel(
@@ -48,17 +48,17 @@ fun DashboardScreen(modifier : Modifier = Modifier,
                             0
                         )
                     ).toString()
-                } catch (E: Exception){
+                } catch (E: Exception) {
                     "error"
                 }
-                val icon = try{
+                val icon = try {
                     packageManager.getApplicationIcon(
                         packageManager.getApplicationInfo(
                             it.first,
                             0
                         )
                     )
-                } catch (e: Exception){
+                } catch (e: Exception) {
                     context.getDrawable(R.drawable.ic_better_focus_background)!!
                 }
                 AppCard(name = name,

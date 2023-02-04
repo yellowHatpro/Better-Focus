@@ -7,7 +7,6 @@ import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.content.pm.PackageManager.NameNotFoundException
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.padding
@@ -25,31 +24,32 @@ class BetterFocusActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        val runningAppProcessInfo = packageManager.getInstalledPackages(0).filter {
-//            !(isSystemApp(it.packageName))
-//        }
-        val usageStatsManager = this.getSystemService(Context.USAGE_STATS_SERVICE) as UsageStatsManager
+        val usageStatsManager =
+            this.getSystemService(Context.USAGE_STATS_SERVICE) as UsageStatsManager
         val endTime = System.currentTimeMillis()
         val startTime = endTime - TimeUnit.DAYS.toMillis(1)
-        val usageStatsList = usageStatsManager.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, startTime, endTime)
-            .map {
+        val usageStatsList =
+            usageStatsManager.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, startTime, endTime)
+                .map {
 
-                val hms = String.format(
-                    "%02d hrs %02d min", TimeUnit.MILLISECONDS.toHours(it.totalTimeInForeground),
-                    TimeUnit.MILLISECONDS.toMinutes(it.totalTimeInForeground) - TimeUnit.HOURS.toMinutes(
-                        TimeUnit.MILLISECONDS.toHours(
-                            it.totalTimeInForeground
+                    val hms = String.format(
+                        "%02d hrs %02d min",
+                        TimeUnit.MILLISECONDS.toHours(it.totalTimeInForeground),
+                        TimeUnit.MILLISECONDS.toMinutes(it.totalTimeInForeground) - TimeUnit.HOURS.toMinutes(
+                            TimeUnit.MILLISECONDS.toHours(
+                                it.totalTimeInForeground
+                            )
                         )
                     )
-                )
-            (it.packageName to hms)
-        }.filter {
-                Log.d("filter",it.first)
-            !(isSystemApp(it.first)) && !it.first.contains("com.android", ignoreCase = true)&& !(it.second.contains("00 hrs 00 min"))
-        }
-            .reversed()
-            .distinctBy { it.first }
-        Log.d("IsIt",usageStatsList.map { it.first }.toString())
+                    (it.packageName to hms)
+                }.filter {
+                    !(isSystemApp(it.first)) && !it.first.contains(
+                        "com.android",
+                        ignoreCase = true
+                    ) && !(it.second.contains("00 hrs 00 min"))
+                }
+                .reversed()
+                .distinctBy { it.first }
         setContent {
             val navController = rememberNavController()
             BetterFocusTheme {
@@ -85,5 +85,4 @@ class BetterFocusActivity : ComponentActivity() {
             false
         }
     }
-
 }
