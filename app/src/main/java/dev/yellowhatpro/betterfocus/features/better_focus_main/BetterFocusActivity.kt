@@ -33,6 +33,7 @@ class BetterFocusActivity : ComponentActivity() {
         val startTime = endTime - TimeUnit.DAYS.toMillis(1)
         val usageStatsList = usageStatsManager.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, startTime, endTime)
             .map {
+
                 val hms = String.format(
                     "%02d hrs %02d min", TimeUnit.MILLISECONDS.toHours(it.totalTimeInForeground),
                     TimeUnit.MILLISECONDS.toMinutes(it.totalTimeInForeground) - TimeUnit.HOURS.toMinutes(
@@ -43,8 +44,11 @@ class BetterFocusActivity : ComponentActivity() {
                 )
             (it.packageName to hms)
         }.filter {
-            !(isSystemApp(it.first))
+                Log.d("filter",it.first)
+            !(isSystemApp(it.first)) && !it.first.contains("com.android", ignoreCase = true)&& !(it.second.contains("00 hrs 00 min"))
         }
+            .reversed()
+            .distinctBy { it.first }
         Log.d("IsIt",usageStatsList.map { it.first }.toString())
         setContent {
             val navController = rememberNavController()
