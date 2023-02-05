@@ -2,15 +2,20 @@ package dev.yellowhatpro.betterfocus.features
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.chargemap.compose.numberpicker.Hours
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.yellowhatpro.betterfocus.utils.SharedPrefManager
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class BetterFocusViewModel @Inject constructor(): ViewModel() {
 
-    private fun updateFocusList(app: Pair<String, Pair<Int, Int>>) {
+    private var _focusApps = MutableStateFlow(emptyList<Pair<String, Hours>>())
+    val focusApps = _focusApps.asStateFlow()
+    private fun updateFocusList(app: Pair<String, Hours>) {
         viewModelScope.launch {
             val currentList = SharedPrefManager.focusList ?: listOf()
             val newList = currentList + listOf(app)
@@ -18,7 +23,7 @@ class BetterFocusViewModel @Inject constructor(): ViewModel() {
         }
     }
 
-    private fun removeAppFromFocusList(packageName: String) {
+    fun removeAppFromFocusList(packageName: String) {
         viewModelScope.launch {
             val currentList = SharedPrefManager.focusList ?: listOf()
             val newList = currentList.filter {
@@ -36,7 +41,7 @@ class BetterFocusViewModel @Inject constructor(): ViewModel() {
             currentList.map { it.first }.contains(packageName)
         }
     }
-    fun updateTimeOfAppInFocusList(app: Pair<String, Pair<Int, Int>>) {
+    fun updateTimeOfAppInFocusList(app: Pair<String, Hours>) {
         viewModelScope.launch {
             if (focusListContainsApp(app.first)){
                 removeAppFromFocusList(app.first)
@@ -48,4 +53,11 @@ class BetterFocusViewModel @Inject constructor(): ViewModel() {
             }
         }
     }
+
+    fun provideFocusApps() {
+        viewModelScope.launch {
+            _focusApps.value = SharedPrefManager.focusList ?: listOf()
+        }
+    }
+
 }
