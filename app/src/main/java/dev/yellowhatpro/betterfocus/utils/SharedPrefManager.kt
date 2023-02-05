@@ -42,11 +42,22 @@ object SharedPrefManager {
                 setBoolean("IS_OB_DONE", value)
             }
         }
-    var isUsageStatsPermissionGranted :Boolean?
+    var isUsageStatsPermissionGranted: Boolean?
         get() = pref.getBoolean("IS_USPG", false)
-        set(value){
+        set(value) {
             value?.let {
                 setBoolean("IS_USPG", value)
+            }
+        }
+
+    var focusList: List<Pair<String, Pair<Int,Int>>>?
+        get() = pref.getString("TIME_LIMIT_OF_APPS", "")?.let {
+            if (it.isBlank()) null else
+                TypeConverter.listFromJSON(it)
+        }
+        set(value) {
+            value?.let {
+                setString("TIME_LIMIT_OF_APPS", TypeConverter.listToJSON(it))
             }
         }
 }

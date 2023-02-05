@@ -14,12 +14,14 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
+import dagger.hilt.android.AndroidEntryPoint
 import dev.yellowhatpro.betterfocus.ui.components.BottomNavBar
 import dev.yellowhatpro.betterfocus.ui.navigation.BetterFocusNavigation
 import dev.yellowhatpro.betterfocus.ui.theme.BetterFocusTheme
 import java.util.concurrent.TimeUnit
 
 
+@AndroidEntryPoint
 class BetterFocusActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {

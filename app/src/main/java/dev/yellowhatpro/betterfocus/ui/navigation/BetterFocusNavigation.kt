@@ -4,7 +4,7 @@ import android.content.pm.PackageManager
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.AccountBox
 import androidx.compose.material.icons.rounded.Dashboard
-import androidx.compose.material.icons.rounded.DoNotDisturb
+import androidx.compose.material.icons.rounded.Timelapse
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -27,7 +27,7 @@ fun BetterFocusNavigation(
             DashboardScreen(modifier = modifier, usageStatsList, packageManager)
         }
         composable(route = NavigationItem.Focus.route) {
-            FocusScreen(modifier = modifier, usageStatsList, packageManager)
+            FocusScreen(modifier = modifier)
         }
         composable(route = NavigationItem.About.route) {
             AboutScreen()
@@ -36,9 +36,9 @@ fun BetterFocusNavigation(
 }
 
 sealed class NavigationItem(var route: String,
-                            var icon: ImageVector,
-                            var title : String) {
+     var icon: ImageVector,
+     var title : String) {
     object Dashboard : NavigationItem("dashboard", Icons.Rounded.Dashboard, "Dashboard")
-    object Focus : NavigationItem("focus", Icons.Rounded.DoNotDisturb, "Focus")
+    object Focus : NavigationItem("focus", Icons.Rounded.Timelapse, "Focus")
     object About : NavigationItem("setting", Icons.Rounded.AccountBox, "About")
 }

@@ -9,9 +9,12 @@ import androidx.compose.ui.unit.sp
 import dev.yellowhatpro.betterfocus.R
 
 // Set of Material typography styles to start with
+
+val GlobalFontFamily = FontFamily(Font(R.font.rubik_regular))
+
 val Typography = Typography(
     bodyLarge = TextStyle(
-        fontFamily = FontFamily(Font(R.font.rubik_regular)),
+        fontFamily = GlobalFontFamily,
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp,
         lineHeight = 24.sp,
