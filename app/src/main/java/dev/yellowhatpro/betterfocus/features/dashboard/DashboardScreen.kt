@@ -179,8 +179,10 @@ fun DashboardScreen(modifier : Modifier = Modifier,
                                     },
                                     trailingContent = { 
                                                       FilledTonalIconButton(onClick = {
-                                                          viewModel.updateTimeOfAppInFocusList(sortedApps[shouldShowPopUp].first to pickerValue )
-                                                          shouldShowPopUp = -1
+                                                       if (shouldShowPopUp!=-1){
+                                                           viewModel.updateTimeOfAppInFocusList(sortedApps[shouldShowPopUp].first to pickerValue )
+                                                           shouldShowPopUp = -1
+                                                       }
                                                       }) {
                                                           Icon(
                                                               imageVector = Icons.Rounded.Done,

@@ -38,7 +38,7 @@ fun FocusScreen(modifier : Modifier = Modifier, packageManager: PackageManager, 
     Column {
         val focusApps = SharedPrefManager.focusList ?: listOf()
         LazyColumn(state = lazyListState) {
-            items(focusApps, key = { app -> app.id }) { app ->
+            items(focusApps) { app ->
                 val currentItem by rememberUpdatedState(app)
                 val dismissState = rememberDismissState()
                 if (dismissState.isDismissed(DismissDirection.EndToStart)) {
