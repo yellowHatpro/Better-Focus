@@ -1,6 +1,5 @@
 package dev.yellowhatpro.betterfocus.features.focus
 
-import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -15,7 +14,6 @@ fun FocusScreen(modifier : Modifier = Modifier
     Column {
         LazyColumn{
             val focusApps = SharedPrefManager.focusList ?: listOf()
-            Log.d("focusList",focusApps.toString())
             items(focusApps){
                 Text(text = it.first)
             }

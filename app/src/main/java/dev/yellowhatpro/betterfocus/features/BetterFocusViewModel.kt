@@ -18,30 +18,30 @@ class BetterFocusViewModel @Inject constructor(): ViewModel() {
         }
     }
 
-    fun removeAppFromFocusList(packageName: String) {
+    private fun removeAppFromFocusList(packageName: String) {
         viewModelScope.launch {
             val currentList = SharedPrefManager.focusList ?: listOf()
-            currentList.filter {
+            val newList = currentList.filter {
                 it.first != packageName
             }
-            SharedPrefManager.focusList = currentList
+            SharedPrefManager.focusList = newList
         }
     }
 
-    private fun focusListContainsApp(app: Pair<String, Pair<Int, Int>>) : Boolean {
+    private fun focusListContainsApp(packageName: String) : Boolean {
         val currentList = SharedPrefManager.focusList
         return if (currentList.isNullOrEmpty()) {
             false
         } else {
-            currentList.map { it.first }.contains(app.first)
+            currentList.map { it.first }.contains(packageName)
         }
     }
     fun updateTimeOfAppInFocusList(app: Pair<String, Pair<Int, Int>>) {
         viewModelScope.launch {
-            if (focusListContainsApp(app)){
+            if (focusListContainsApp(app.first)){
+                removeAppFromFocusList(app.first)
                 updateFocusList(app)
             } else {
-                removeAppFromFocusList(app.first)
                 val currentList = SharedPrefManager.focusList ?: listOf()
                 val newList = currentList + listOf(app)
                 SharedPrefManager.focusList = newList

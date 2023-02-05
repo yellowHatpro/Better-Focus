@@ -1,7 +1,6 @@
 package dev.yellowhatpro.betterfocus.features.dashboard
 
 import android.content.pm.PackageManager
-import android.util.Log
 import androidx.compose.foundation.border
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
@@ -21,8 +20,8 @@ import androidx.compose.material.icons.filled.Timelapse
 import androidx.compose.material.icons.rounded.Done
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -179,7 +178,7 @@ fun DashboardScreen(modifier : Modifier = Modifier,
                                                      )
                                     },
                                     trailingContent = { 
-                                                      IconButton(onClick = {
+                                                      FilledTonalIconButton(onClick = {
                                                           viewModel.updateTimeOfAppInFocusList(sortedApps[shouldShowPopUp].first to (pickerValue.hours to pickerValue.minutes) )
                                                           shouldShowPopUp = -1
                                                       }) {
