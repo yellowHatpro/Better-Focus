@@ -66,8 +66,10 @@ dependencies {
     //Lottie
     implementation "com.airbnb.android:lottie-compose:5.2.0"
 
-    //Accompanist
     implementation "com.google.accompanist:accompanist-drawablepainter:0.25.1"
+
+    //Number Picker
+    implementation "com.chargemap.compose:numberpicker:1.0.3"
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'

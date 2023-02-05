@@ -28,9 +28,7 @@ fun AppCard(name:String,
     time: String,
     modifier : Modifier = Modifier) {
     Box(modifier = modifier
-        .width(160.dp)
-        .padding(8.dp)
-        .clip(RoundedCornerShape(20.dp))
+
         .background(MaterialTheme.colorScheme.primaryContainer)) {
         Column(
             modifier = Modifier.fillMaxSize().padding(5.dp),
