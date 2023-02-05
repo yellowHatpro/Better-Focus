@@ -27,7 +27,7 @@
         android:theme="@style/Theme.BetterFocus"
         tools:targetApi="31">
         <activity
-            android:name=".features.better_focus_main.BetterFocusActivity"
+            android:name=".features.BetterFocusActivity"
             android:theme="@style/Theme.BetterFocus">
         </activity>
         <activity

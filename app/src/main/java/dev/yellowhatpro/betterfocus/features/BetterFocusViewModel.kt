@@ -1,4 +1,4 @@
-package dev.yellowhatpro.betterfocus.features.better_focus_main
+package dev.yellowhatpro.betterfocus.features
 
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

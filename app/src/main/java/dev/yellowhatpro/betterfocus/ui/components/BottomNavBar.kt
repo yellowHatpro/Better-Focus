@@ -9,7 +9,7 @@ import androidx.compose.runtime.getValue
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
-import dev.yellowhatpro.betterfocus.ui.components.NavigationItem.*
+import dev.yellowhatpro.betterfocus.ui.navigation.NavigationItem.*
 
 @Composable
 fun BottomNavBar(
@@ -18,7 +18,7 @@ fun BottomNavBar(
     val items = listOf(
         Dashboard,
         Focus,
-        Setting
+        About
     )
     val backStackEntry by navController.currentBackStackEntryAsState()
     NavigationBar {

@@ -1,19 +1,19 @@
-package dev.yellowhatpro.betterfocus.ui.components
+package dev.yellowhatpro.betterfocus.ui.navigation
 
 import android.content.pm.PackageManager
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.AccountBox
 import androidx.compose.material.icons.rounded.Dashboard
 import androidx.compose.material.icons.rounded.DoNotDisturb
-import androidx.compose.material.icons.rounded.Settings
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import dev.yellowhatpro.betterfocus.features.about.AboutScreen
 import dev.yellowhatpro.betterfocus.features.dashboard.DashboardScreen
 import dev.yellowhatpro.betterfocus.features.focus.FocusScreen
-import dev.yellowhatpro.betterfocus.features.setting.SettingScreen
 
 @Composable
 fun BetterFocusNavigation(
@@ -29,16 +29,16 @@ fun BetterFocusNavigation(
         composable(route = NavigationItem.Focus.route) {
             FocusScreen(modifier = modifier, usageStatsList, packageManager)
         }
-        composable(route = NavigationItem.Setting.route) {
-            SettingScreen()
+        composable(route = NavigationItem.About.route) {
+            AboutScreen()
         }
     }
 }
 
-sealed class NavigationItem( var route: String,
-    var icon: ImageVector,
-    var title : String) {
+sealed class NavigationItem(var route: String,
+                            var icon: ImageVector,
+                            var title : String) {
     object Dashboard : NavigationItem("dashboard", Icons.Rounded.Dashboard, "Dashboard")
     object Focus : NavigationItem("focus", Icons.Rounded.DoNotDisturb, "Focus")
-    object Setting : NavigationItem("setting", Icons.Rounded.Settings, "Setting")
+    object About : NavigationItem("setting", Icons.Rounded.AccountBox, "About")
 }

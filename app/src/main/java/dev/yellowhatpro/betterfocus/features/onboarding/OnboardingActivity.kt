@@ -17,7 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import dev.yellowhatpro.betterfocus.R
-import dev.yellowhatpro.betterfocus.features.better_focus_main.BetterFocusActivity
+import dev.yellowhatpro.betterfocus.features.BetterFocusActivity
 import dev.yellowhatpro.betterfocus.ui.theme.BetterFocusTheme
 import dev.yellowhatpro.betterfocus.utils.SharedPrefManager
 

@@ -1,4 +1,4 @@
-package dev.yellowhatpro.betterfocus.features.better_focus_main
+package dev.yellowhatpro.betterfocus.features
 
 import android.annotation.SuppressLint
 import android.app.usage.UsageStatsManager
@@ -14,8 +14,8 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
-import dev.yellowhatpro.betterfocus.ui.components.BetterFocusNavigation
 import dev.yellowhatpro.betterfocus.ui.components.BottomNavBar
+import dev.yellowhatpro.betterfocus.ui.navigation.BetterFocusNavigation
 import dev.yellowhatpro.betterfocus.ui.theme.BetterFocusTheme
 import java.util.concurrent.TimeUnit
 
