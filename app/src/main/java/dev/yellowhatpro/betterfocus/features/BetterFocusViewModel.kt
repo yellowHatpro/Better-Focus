@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.chargemap.compose.numberpicker.Hours
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dev.yellowhatpro.betterfocus.data.FocusApp
 import dev.yellowhatpro.betterfocus.utils.SharedPrefManager
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -13,9 +14,9 @@ import javax.inject.Inject
 @HiltViewModel
 class BetterFocusViewModel @Inject constructor(): ViewModel() {
 
-    private var _focusApps = MutableStateFlow(emptyList<Pair<String, Hours>>())
+    private var _focusApps = MutableStateFlow(emptyList<FocusApp>())
     val focusApps = _focusApps.asStateFlow()
-    private fun updateFocusList(app: Pair<String, Hours>) {
+    private fun updateFocusList(app: FocusApp) {
         viewModelScope.launch {
             val currentList = SharedPrefManager.focusList ?: listOf()
             val newList = currentList + listOf(app)
@@ -27,7 +28,7 @@ class BetterFocusViewModel @Inject constructor(): ViewModel() {
         viewModelScope.launch {
             val currentList = SharedPrefManager.focusList ?: listOf()
             val newList = currentList.filter {
-                it.first != packageName
+                it.packageName != packageName
             }
             SharedPrefManager.focusList = newList
         }
@@ -38,17 +39,18 @@ class BetterFocusViewModel @Inject constructor(): ViewModel() {
         return if (currentList.isNullOrEmpty()) {
             false
         } else {
-            currentList.map { it.first }.contains(packageName)
+            currentList.map { it.packageName }.contains(packageName)
         }
     }
     fun updateTimeOfAppInFocusList(app: Pair<String, Hours>) {
         viewModelScope.launch {
-            if (focusListContainsApp(app.first)){
-                removeAppFromFocusList(app.first)
-                updateFocusList(app)
+            val newApp = FocusApp(packageName = app.first, hours = app.second.hours, minutes = app.second.minutes)
+            if (focusListContainsApp(newApp.packageName)){
+                removeAppFromFocusList(newApp.packageName)
+                updateFocusList(newApp)
             } else {
                 val currentList = SharedPrefManager.focusList ?: listOf()
-                val newList = currentList + listOf(app)
+                val newList = currentList + listOf(newApp)
                 SharedPrefManager.focusList = newList
             }
         }

@@ -4,6 +4,7 @@ import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import com.chargemap.compose.numberpicker.Hours
 import dev.yellowhatpro.betterfocus.App
+import dev.yellowhatpro.betterfocus.data.FocusApp
 
 object SharedPrefManager {
     val pref: SharedPreferences
@@ -51,7 +52,7 @@ object SharedPrefManager {
             }
         }
 
-    var focusList: List<Pair<String, Hours>>?
+    var focusList: List<FocusApp>?
         get() = pref.getString("TIME_LIMIT_OF_APPS", "")?.let {
             if (it.isBlank()) null else
                 TypeConverter.listFromJSON(it)
