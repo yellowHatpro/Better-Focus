@@ -18,6 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import dev.yellowhatpro.betterfocus.R
 import dev.yellowhatpro.betterfocus.ui.components.AppCard
@@ -34,7 +35,6 @@ fun DashboardScreen(modifier : Modifier = Modifier,
         verticalArrangement = Arrangement.Center
     ) {
         val context = LocalContext.current
-
         Column(
             modifier = Modifier.fillMaxWidth()
                 .height(250.dp)
@@ -42,9 +42,11 @@ fun DashboardScreen(modifier : Modifier = Modifier,
         ) {
             LottieAnim(rawRes = R.raw.dashboard_apps_anim)
         }
-        Text(text = "These are some of the apps that you use frequently", modifier = Modifier.fillMaxWidth())
+
+        Text(text = "These are your frequently used apps", modifier = Modifier.fillMaxWidth() , textAlign = TextAlign.Center)
+        val sortedApps = sortApps(usageStatsList)
         LazyVerticalGrid(columns = GridCells.Adaptive(170.dp)) {
-            items(usageStatsList.filter {
+            items(sortedApps.filter {
                 val name = try {
                     packageManager.getApplicationLabel(
                         packageManager.getApplicationInfo(
@@ -95,4 +97,14 @@ fun DashboardScreen(modifier : Modifier = Modifier,
             }
         }
     }
+}
+
+fun sortApps(apps: List<Pair<String,String>>) : List<Pair<String, String>> {
+    val pattern = "(\\d+)".toRegex()
+    val sorted = apps.sortedWith(compareBy {
+        val hours = pattern.find(it.second)?.value?.toInt() ?: 0
+        val min = pattern.findAll(it.second).lastOrNull()?.value?.toInt() ?: 0
+        hours * 60 + min
+    }).reversed()
+    return sorted
 }

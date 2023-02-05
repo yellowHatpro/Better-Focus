@@ -27,7 +27,7 @@ fun BetterFocusNavigation(
             DashboardScreen(modifier = modifier, usageStatsList, packageManager)
         }
         composable(route = NavigationItem.Focus.route) {
-            FocusScreen()
+            FocusScreen(modifier = modifier, usageStatsList, packageManager)
         }
         composable(route = NavigationItem.Setting.route) {
             SettingScreen()
