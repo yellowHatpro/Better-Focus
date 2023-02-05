@@ -179,7 +179,7 @@ fun DashboardScreen(modifier : Modifier = Modifier,
                                     },
                                     trailingContent = { 
                                                       FilledTonalIconButton(onClick = {
-                                                          viewModel.updateTimeOfAppInFocusList(sortedApps[shouldShowPopUp].first to (pickerValue.hours to pickerValue.minutes) )
+                                                          viewModel.updateTimeOfAppInFocusList(sortedApps[shouldShowPopUp].first to pickerValue )
                                                           shouldShowPopUp = -1
                                                       }) {
                                                           Icon(

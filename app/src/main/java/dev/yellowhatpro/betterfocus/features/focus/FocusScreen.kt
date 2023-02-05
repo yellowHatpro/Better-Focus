@@ -67,7 +67,7 @@ fun FocusScreen(modifier : Modifier = Modifier, packageManager: PackageManager, 
                                     ).toString())
                                 },
                                 supportingText = {
-                                                 Text(text = "Time Limit: ${app.second.first} Hours ${app.second.second} minutes")
+                                                 Text(text = "Time Limit: ${app.second.hours} Hours ${app.second.minutes} minutes")
                                 }
                                 ,
                                 leadingContent = {
