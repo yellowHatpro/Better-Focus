@@ -18,6 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import dev.yellowhatpro.betterfocus.ui.components.BottomNavBar
 import dev.yellowhatpro.betterfocus.ui.navigation.BetterFocusNavigation
 import dev.yellowhatpro.betterfocus.ui.theme.BetterFocusTheme
+import dev.yellowhatpro.betterfocus.utils.SharedPrefManager
 import java.util.concurrent.TimeUnit
 
 
@@ -51,6 +52,9 @@ class BetterFocusActivity : ComponentActivity() {
                 }
                 .reversed()
                 .distinctBy { it.first }
+        SharedPrefManager.allApps = usageStatsList.map {
+            it.first
+        }
         setContent {
             val navController = rememberNavController()
             BetterFocusTheme {

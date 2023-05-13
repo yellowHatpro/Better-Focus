@@ -18,7 +18,7 @@ fun BottomNavBar(
     val items = listOf(
         Dashboard,
         Focus,
-        About
+        Tools
     )
     val backStackEntry by navController.currentBackStackEntryAsState()
     NavigationBar {

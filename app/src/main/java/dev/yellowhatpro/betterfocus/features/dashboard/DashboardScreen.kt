@@ -60,6 +60,7 @@ fun DashboardScreen(modifier : Modifier = Modifier,
     var shouldShowPopUp by remember {
         mutableStateOf(-1 )
     }
+    viewModel.getAllAppsFromPM()
     Column(
         modifier = modifier
             .fillMaxSize(),
